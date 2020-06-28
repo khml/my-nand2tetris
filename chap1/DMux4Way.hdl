@@ -1,0 +1,13 @@
+/* DMUX4Way Gate */
+
+CHIP DMux4Way {
+    IN in, sel[2];
+    OUT a, b, c, d;
+    PARTS:
+    Not(in=sel[1], out=notsel1);
+    And(a=in, b=notsel1, out=inab);
+    And(a=in, b=sel[1], out=incd);
+    DMux(in=inab, sel=sel[0], a=a, b=b);
+    DMux(in=incd, sel=sel[0], a=c, b=d);
+}
+
