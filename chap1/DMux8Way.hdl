@@ -1,0 +1,13 @@
+/* DMUX8Way Gate */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+    PARTS:
+    Not(in=sel[2], out=notsel2);
+    And(a=in, b=notsel2, out=inabcd);
+    And(a=in, b=sel[2], out=inefgh);
+    DMux4Way(in=inabcd, sel=sel[0..1], a=a, b=b, c=c, d=d);
+    DMux4Way(in=inefgh, sel=sel[0..1], a=e, b=f, c=g, d=h);
+}
+
